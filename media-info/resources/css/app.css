@@ -1,0 +1,261 @@
+*{
+    margin: 0;
+    padding: 0;
+  
+  }
+  body{
+    background-color: rgb(80,80,107)
+  }
+  
+  .container-lg{
+    padding-right: 0;
+    padding-left: 0;
+  }
+  
+  header, nav, .category, .img-container {
+    background-color: rgb(221,227,241);
+  }
+  
+  .mybacground-color{
+    background-color: rgb(80,80,107);
+  }
+ .text-color{
+   color: rgb(221,227,241);
+ }
+
+  .alert-message{
+    position: fixed;
+    top: 0;
+    left: 43%;
+    padding: 40px;
+    background-color: green;
+    border-radius: 20px; 
+    transition: ease-in-out 1s;
+  }
+
+  /*#region Index */
+  
+  a{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .clock{
+    font-size: 15px;
+    font-weight: 400;
+  
+  }
+  
+  .spacebetween{
+    margin-right: 3rem;
+  }
+  
+  .navbar{
+    height: 60px;
+  }
+  
+  .myNav ul li a,.category ul li a , #add-movie{
+    color: black;
+    font-size: 13px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+  }
+  
+  .myNav ul li {
+    padding-left: 45px;
+  }
+  
+  
+  .card-body a{
+      text-decoration: none;
+      font-size: 1rem;
+  }
+  
+  .top-film{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .top-film > div{
+    margin: 15px;
+    width: 12rem;
+  }
+  
+
+
+  /*#endregion Index */
+  
+  .login-wrap,.register-wrap{
+    width:100%;
+    margin:auto;
+    margin-top: 30px;
+    max-width:325px;
+    min-height:360px;
+    background-color: #b7b4b4;
+    /*background:url(http://codinginfinite.com/demo/images/bg.jpg) no-repeat center;*/
+    box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+  }
+
+  .register-wrap{
+    min-height:600px;
+  }
+
+   /* Categories */
+  
+   .category-name{
+     background-color: rgb(221,227,241);
+   }
+   .category-name a{
+     text-decoration: none;
+     font-size: 20px;
+     font-weight: bold;
+   }
+  
+  
+   /* Category */
+  
+  
+  .form-filter{
+    display: flex;
+    flex-direction: row;
+  }
+  
+  
+  /* Add-Movie */
+  
+  .col-form-label{
+    font-size:17px;
+    font-weight: 700;
+    color: rgb(221,227,241);
+  }
+  
+  /* movie-page */
+  
+  .image-movie{
+    margin: auto;
+  }
+  .image-movie img {
+    max-width: 600px;
+    max-height: 700px;
+  }
+  
+  .information span:not(:last-child){
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  
+  /* Paging buttons */
+  
+  .items {   
+    display: inline-block;  
+    margin-left: 100px; 
+  }   
+  .items a {   
+    font-weight:bold;  
+    font-size:18px;   
+    color: black;   
+    float: left;   
+    padding: 8px 16px;   
+    text-decoration: none;   
+    margin: 2px; 
+    
+    background-color: #fff;   
+  }   
+  
+  .items a.active {   
+    background-color: rgba(175, 201, 244, 0.97);   
+  }   
+  
+  .items a:hover:not(.active) {   
+    background-color: #87ceeb;   
+  }   
+  
+  
+  /* Movie comments */
+  .hiden{
+    display: none;
+  }
+  
+  .card {
+    box-shadow: 5px 6px 6px 2px #e9ecef;
+    border-radius: 4px;
+  }
+  .dots{
+  
+    height: 4px;
+  width: 4px;
+  margin-bottom: 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  }
+  
+  .badge{
+  
+        padding: 7px;
+        padding-right: 9px;
+    padding-left: 16px;
+    box-shadow: 5px 6px 6px 2px #e9ecef;
+  }
+  
+  .user-img{
+  
+    margin-top: 4px;
+  }
+  
+  .check-icon{
+  
+    font-size: 17px;
+    color: #c3bfbf;
+    top: 1px;
+    position: relative;
+    margin-left: 3px;
+  }
+  
+  .form-check-input{
+    margin-top: 6px;
+    margin-left: -24px !important;
+    cursor: pointer;
+  }
+  
+  
+  .form-check-input:focus{
+    box-shadow: none;
+  }
+  
+  
+  .icons i{
+  
+    margin-left: 8px;
+  }
+  .reply{
+  
+    margin-left: 12px;
+  }
+  
+  .reply small{
+  
+    color: #b7b4b4;
+  
+  }
+  
+  
+  .reply small:hover{
+  
+    color: green;
+    cursor: pointer;
+  
+  }
+  
+  .text-comment{
+     white-space: pre-wrap;      /* Webkit */    
+   white-space: -moz-pre-wrap; /* Firefox */     
+   white-space: -pre-wrap;     /* Opera <7 */    
+   white-space: -o-pre-wrap;   /* Opera 7 */     
+   word-wrap: break-word; 
+   
+  }
