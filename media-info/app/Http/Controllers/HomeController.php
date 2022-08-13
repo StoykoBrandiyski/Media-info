@@ -6,10 +6,11 @@ use App\Models\Movie;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Services\MovieService;
+use App\Services\Interfaces\IMovieService;
 
 class HomeController extends Controller
 {
-    public function index(MovieService $movieService)
+    public function index(IMovieService $movieService)
     {
         $movies = $movieService->getLatestMovie();
 

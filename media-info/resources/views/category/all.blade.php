@@ -17,7 +17,7 @@
                       <img src="1.png" class="img-fluid" alt="">
                     </div>
                     <div class="category-name col-5 col-lg-5 text-center">
-                      <a href="category.php?catId=2" class="">Комедия</a>
+                      <a href="{{ URL::asset('categories/comedy') }} ">Комедия</a>
                     </div>
                   </div>
                   </div>
@@ -28,7 +28,7 @@
                       <img src="1.png" class="img-fluid" alt="">
                     </div>
                     <div class="category-name col-5 col-lg-5 text-center">
-                      <a href="category.php?catId=6">Драма</a>
+                      <a href="{{ URL::asset('categories/drama') }} ">Драма</a>
                     </div>
                   </div>
                   </div>
@@ -39,7 +39,7 @@
                       <img src="1.png" class="img-fluid" alt="">
                     </div>
                     <div class="category-name col-5 col-lg-5 text-center">
-                      <a href="category.php?catId=3">Фантастика</a>
+                      <a href="{{ URL::asset('categories/fantasy') }} ">Фантастика</a>
                     </div>
                   </div>
                   </div>
@@ -50,7 +50,7 @@
                       <img src="1.png" class="img-fluid" alt="">
                     </div>
                     <div class="category-name col-5 col-lg-5 text-center">
-                      <a href="category.php?catId=4">Ужаси</a>
+                      <a href="{{ URL::asset('categories/horror') }} ">Ужаси</a>
                     </div>
                   </div>
                   </div>
@@ -61,7 +61,7 @@
                       <img src="1.png" class="img-fluid" alt="">
                     </div>
                     <div class="category-name  col-5 col-lg-5 text-center">
-                      <a href="category.php?catId=5">Приключенски</a>
+                      <a href="{{ URL::asset('categories/adventure') }} ">Приключенски</a>
                     </div>
                   </div>
                   </div>
@@ -72,34 +72,31 @@
                       <img src="1.png" class="img-fluid" alt="">
                     </div>
                     <div class="category-name col-5 col-lg-5 text-center">
-                      <a href="category.php?catId=7">Трилър</a>
+                      <a href="{{ URL::asset('categories/triller') }} ">Трилър</a>
                     </div>
                   </div>
                   </div>
-            
+           
                   <div class="category-c pt-4">
                   <div class="" >
                     <div class="image ">
                       <img src="1.png" class="img-fluid" alt="">
                     </div>
                     <div class="category-name col-5 col-lg-5 text-center">
-                      <a href="category.php?catId=8">Анимации</a>
+                      <a href="{{ URL::asset('categories/animation') }} ">Анимации</a>
                     </div>
                   </div>
                   </div>
-            
                   <div class="category-c pt-4">
                   <div class="" >
                     <div class="image ">
                       <img src="1.png" class="img-fluid" alt="">
                     </div>
                     <div class="category-name col-5 col-lg-5 text-center">
-                      <a href="category.php?catId=9">Уестърн</a>
+                      <a href="{{ URL::asset('categories/western') }} ">Уестърн</a>
                     </div>
                   </div>
-                  </div>
-            
+                  </div>      
                 </div>
                 </div>
-
 </x-layout>

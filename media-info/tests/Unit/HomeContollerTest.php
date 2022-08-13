@@ -2,8 +2,10 @@
 
 namespace Tests\Unit;
 
-use App\Services\UserService;
 use PHPUnit\Framework\TestCase;
+use App\Services\Mocks\MMovieService;
+use App\Http\Controllers\HomeController;
+
 
 class HomeContollerTest extends TestCase
 {
@@ -12,9 +14,21 @@ class HomeContollerTest extends TestCase
      *
      * @return void
      */
+   
     public function test_example()
     {
         $this->assertTrue(true);
 
+    }
+
+    public function test_mock()
+    { 
+        $mockMovieService = new MMovieService();
+        $homeController = new HomeController();
+
+        $movies = $homeController->index($mockMovieService);
+        
+        $this->assertViewsIs('home.index',['movies' => $movies]);
+        
     }
 }

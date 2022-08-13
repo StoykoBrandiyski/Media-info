@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Services\FileService;
 use App\Services\UserService;
 use Illuminate\Validation\Rule;
+use App\Services\Interfaces\IUserService;
 
 
 class UserController extends Controller
@@ -19,7 +20,7 @@ class UserController extends Controller
     }
 
     //Create user
-    public function store(Request $request,UserService $userService)
+    public function store(Request $request,IUserService $userService)
     {
         $formFields = $request->validate([
             'username' => ['required', 'min:4','max:50'],
@@ -42,7 +43,7 @@ class UserController extends Controller
     }
 
     //Login user
-    public function authenticate(Request $request,UserService $userService)
+    public function authenticate(Request $request,IUserService $userService)
     {
         $formFields = $request->validate([
             'username' => 'required',
@@ -59,7 +60,7 @@ class UserController extends Controller
     }
 
     //Logout user
-    public function logout(Request $request,UserService $userService)
+    public function logout(Request $request,IUserService $userService)
     {
         $userService->logout($request);
         
@@ -77,7 +78,7 @@ class UserController extends Controller
         return view('user.edit' , ['user' => $user]);
     }
 
-    public function storeEditUser(Request $request,UserService $userService,FileService $fileService)
+    public function storeEditUser(Request $request,IUserService $userService,FileService $fileService)
     {
         $formFields = $request->validate([
             'age' => 'numeric|min:18|max:85',

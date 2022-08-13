@@ -3,8 +3,9 @@ namespace App\Services;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Services\Interfaces\IUserService;
 
-class UserService {
+class UserService implements IUserService {
 
     public function getUserByID($id)
     {

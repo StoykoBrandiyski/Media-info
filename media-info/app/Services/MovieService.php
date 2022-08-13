@@ -4,8 +4,9 @@ namespace App\Services;
 
 use App\Models\Movie;
 use Illuminate\Support\Facades\DB;
+use App\Services\Interfaces\IMovieService;
 
-class MovieService {
+class MovieService implements IMovieService {
 
     public function getLatestMovie()
     {
@@ -22,7 +23,11 @@ class MovieService {
         ->select('movies.*')
         ->get();
 
-        return $moviesDb; 
+        $movies = Movie::join('categories','categories.id', '=', 'movies.category_id')
+                        ->where('name',$category)
+                        ->get();
+
+        return $movies; 
     }
 
     public function addMovie($fiels)

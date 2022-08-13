@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\MovieService;
+use App\Services\Interfaces\IMovieService;
 use Illuminate\Support\ServiceProvider;
 
 class MovieServiceProvider extends ServiceProvider
@@ -13,7 +15,9 @@ class MovieServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(IMovieService::class, function () {
+            return new MovieService();
+        });
     }
 
     /**
