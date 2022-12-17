@@ -26,8 +26,7 @@ class MovieService implements IMovieService {
         $movies = Movie::join('categories','categories.id', '=', 'movies.category_id')
                         ->where('name',$category)
                         ->get();
-
-        return $movies; 
+        return $moviesDb; 
     }
 
     public function addMovie($fiels)
