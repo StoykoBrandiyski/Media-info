@@ -1,7 +1,7 @@
+const MAIN_URL = window.location.origin + "/Media-info/media-info/public/";
 
 const showButtonComment = document.getElementById("showCommentLink");
 var movieId =document.querySelector("#reader").getAttribute("data-search");
-
 
 showButtonComment.addEventListener('click',function(){
 
@@ -15,7 +15,7 @@ showButtonComment.addEventListener('click',function(){
         var response = "";
         $.ajax({
             type: "GET",
-            url: "http://localhost:8081/media-info/public/comments/"+movieId,
+            url: MAIN_URL + "comments/"+movieId,
             
             dataType: 'json',
             beforeSend: function() {

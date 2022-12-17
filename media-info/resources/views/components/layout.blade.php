@@ -24,7 +24,7 @@
     <div class="d-flex">
       @auth
        <a href="{{ URL::asset('/add') }}" class="p-2" id="add-movie">Добави филм</a>
-       <span class="p-2">Здравей,</span> <a class="p-2" href="http://localhost:8081/media-info/public/editUser"> {{auth()->user()->username}} </a> 
+       <span class="p-2">Здравей,</span> <a class="p-2" href="{{ URL::asset('/editUser') }}"> {{auth()->user()->username}} </a> 
        <form class="inline" method="POST" action="{{ URL::asset('/logout') }}">
         @csrf
         <button type="submit" class="btn btn-outline-secondary p-2 ">
@@ -65,6 +65,7 @@
     </div>
     
     <x-flash-message />
+  
     <script src="{{ asset('../resources/js/live-clock.js') }} "></script>
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

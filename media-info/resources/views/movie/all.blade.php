@@ -23,7 +23,7 @@
           <div class="card bg-image hover-zoom">
           <img src="{{ asset('../storage/app/public/' . $value->image) }}" class="card-img-top">
           <div class="card-body">
-            <a href="http://localhost:8081/media-info/public/movie_page/{{$value->id}}" class="card-title">{{$value->title}}</a>
+            <a href="{{ url('movie_page',[$value->id])}}" class="card-title">{{$value->title}}</a>
             <span>4.5</span>
             </div>
         </div>

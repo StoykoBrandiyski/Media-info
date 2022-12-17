@@ -6,31 +6,31 @@
             <h4 class="text-secondary">Жанрове </h4>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" href="category.php?catId=1">Екшън</a>
+                    <a class="nav-link" href="{{ url('categories',['action'])}}">Екшън</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="category.php?catId=2">Комедия</a>
+                    <a class="nav-link" href="{{ url('categories',['comedy'])}}">Комедия</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="category.php?catId=3">Фантастика</a>
+                    <a class="nav-link" href="{{ url('categories',['fantasy'])}}">Фантастика</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="category.php?catId=4">Ужаси</a>
+                    <a class="nav-link " href="{{ url('categories',['horror'])}}">Ужаси</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="category.php?catId=5">Приключенски</a>
+                    <a class="nav-link " href="{{ url('categories',['adventure'])}}">Приключенски</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="category.php?catId=6">Драма</a>
+                    <a class="nav-link " href="{{ url('categories',['drama'])}}">Драма</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="category.php?catId=7">Трилър</a>
+                    <a class="nav-link " href="{{ url('categories',['thriller'])}}">Трилър</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="category.php?catId=8">Анимации</a>
+                    <a class="nav-link " href="{{ url('categories',['animation'])}}">Анимации</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="category.php?catId=9">Уестърн</a>
+                    <a class="nav-link " href="{{ url('categories',['western'])}}">Уестърн</a>
                 </li>
             </ul>
             <hr class="d-sm-none">
@@ -48,7 +48,7 @@
      <div class="card">
         <img src="{{ asset('../storage/app/public/' . $movie->image)}}" class="card-img-top">
         <div class="card-body">
-          <a href="http://localhost:8081/media-info/public/movie_page/{{$movie->id}}" class="card-title">{{$movie->title}}</a>
+          <a href="{{ url('movie_page',[$movie->id])}}" class="card-title">{{$movie->title}}</a>
         </div>
       </div>
       @endforeach

@@ -31,7 +31,7 @@
               <div class="card mb-4">
                 <div class="card-body">
                 <h2 class="text-center p-2">Edit your profile</h2>
-                  <form action="http://localhost:8081/media-info/public/storeEditUser" method="POST" enctype="multipart/form-data">
+                  <form action="{{ URL::asset('/storeEditUser') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                   <div class="row">
                     <div class="col-sm-3">
