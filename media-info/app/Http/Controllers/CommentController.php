@@ -1,23 +1,27 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Models\Movie;
-use App\Models\Comment;
 use Illuminate\Http\Request;
-use App\Services\CommentService;
+use App\Contracts\CommentContract;
 
 class CommentController extends Controller
 {
-    public function getCommentsByMovieId($id,CommentService $commentService)
+    private $commentRepository;
+
+    public function __construct(CommentContract $commentRepository)
+    {
+        $this->commentRepository = $commentRepository;   
+    }
+
+    public function getCommentsByMovieId($id)
     {
         //Find comment by movie id 
-        $commentsDb = $commentService->commentsByMovieId($id);
-
+        $commentsDb = $this->commentRepository->commentsByMovieId($id);
+      
         return $commentsDb;
     }
 
-    public function addComment(Request $request,CommentService $commentService)
+    public function addComment(Request $request)
     {
         $formFields = $request->validate([
             'content' => ['required', 'min:10','max:250'],
@@ -27,15 +31,14 @@ class CommentController extends Controller
         $formFields['user_id'] = auth()->user()->id;
         $formFields['created_at'] = date('Y-m-d H:i:s');
         
-        $commentService->createComment($formFields);
-
+        $this->commentRepository->createComment($formFields);
         return redirect('/')->with('message','You added comment ');
     }
 
-    public function getCountCommentByMovieId($id,CommentService $commentService)
+    public function getCountCommentByMovieId($id)
     {
-        $commentsCount = $commentService->countCommentByMovieId($id);
-
+        $commentsCount = $this->commentRepository->countCommentByMovieId($id);
+        
         return $commentsCount;
     }
 

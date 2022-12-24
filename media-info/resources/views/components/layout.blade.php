@@ -46,7 +46,7 @@
       <div class="container-fluid myNav">
         <ul class="navbar-nav">
           <li class="nav-item pl-5">
-            <a class="nav-link active" href="index.php"><span><i class="fas fa-home"></i></span> Начало</a>
+            <a class="nav-link active" href="{{URL::asset('/')}}"><span><i class="fas fa-home"></i></span> Начало</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ URL::asset('/categories') }}"><span><i class="fa-solid fa-film"></i></span>Жанрове</a>

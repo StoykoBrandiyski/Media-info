@@ -1,19 +1,22 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
-use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Services\FileService;
-use App\Services\MovieService;
-use Illuminate\Support\Facades\DB;
+use App\Contracts\MovieContract;
 
 class MovieController extends Controller
 {
-    public function getAllMoviesByCategory($category,MovieService $movieService)
+    private $movieRepository;
+
+    public function __construct(MovieContract $movieRepository)
     {
-        $moviesDb = $movieService->moviesByCategory($category);
+        $this->movieRepository = $movieRepository;   
+    }
+    public function getAllMoviesByCategory($category)
+    {
+        $moviesDb = $this->movieRepository->moviesByCategory($category);
  
         return view('movie.all',
         ['movies' =>  $moviesDb] );
@@ -31,7 +34,7 @@ class MovieController extends Controller
         return view('movie.addMovie');
     }
 
-    public function storeMovie(Request $request,MovieService $movieService,FileService $fileService)
+    public function storeMovie(Request $request,FileService $fileService)
     {
         
         $formFields = $request->validate([
@@ -54,7 +57,7 @@ class MovieController extends Controller
 
         //$formFields['image'] = $request->file('image')->store('movie_images','public');
         
-        $movieService->addMovie($formFields);
+        $this->movieRepository->addMovie($formFields);
         
         return redirect('/')->with('message','Movie created successfully');
     }

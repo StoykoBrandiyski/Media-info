@@ -197,8 +197,8 @@ return [
         App\Providers\UserServiceProvider::class,
         App\Providers\MovieServiceProvider::class,
         App\Providers\FileServiceProvider::class,
-        App\Providers\CommentServiceProvider::class
-
+        App\Providers\CommentServiceProvider::class,
+        App\Providers\RepositoryServiceProvider::class
     ],
 
     /*

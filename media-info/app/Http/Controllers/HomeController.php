@@ -1,18 +1,20 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Models\Movie;
-use Illuminate\Http\Request;
-use App\Services\UserService;
-use App\Services\MovieService;
-use App\Services\Interfaces\IMovieService;
+use App\Contracts\MovieContract;
 
 class HomeController extends Controller
 {
-    public function index(IMovieService $movieService)
+    private $movieRepository;
+
+    public function __construct(MovieContract $movieRepository)
     {
-        $movies = $movieService->getLatestMovie();
+        $this->movieRepository = $movieRepository;
+    }
+
+    public function index()
+    {
+        $movies = $this->movieRepository->getLatestMovie();
 
         return view('home.index',[ 'movies' => $movies] );
     }

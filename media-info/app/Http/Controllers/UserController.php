@@ -1,18 +1,20 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Models\User;
-
+use App\Contracts\UserContract;
 use Illuminate\Http\Request;
 use App\Services\FileService;
-use App\Services\UserService;
-use Illuminate\Validation\Rule;
-use App\Services\Interfaces\IUserService;
 
 
 class UserController extends Controller
 {
+    private $userRepostory;
+
+    public function __construct(UserContract $userRepostory)
+    {
+        $this->userRepostory = $userRepostory;
+    }
+
     //Show register form
     public function create()
     {
@@ -20,7 +22,7 @@ class UserController extends Controller
     }
 
     //Create user
-    public function store(Request $request,IUserService $userService)
+    public function store(Request $request)
     {
         $formFields = $request->validate([
             'username' => ['required', 'min:4','max:50'],
@@ -31,8 +33,7 @@ class UserController extends Controller
             'country' => ['required','min:5','max:50']
         ]);
 
-        $user = $userService->create($formFields);
-
+        $user = $this->userRepository->create($formFields);
         return redirect('/')->with('message','User create and logged in');
     }
 
@@ -43,7 +44,7 @@ class UserController extends Controller
     }
 
     //Login user
-    public function authenticate(Request $request,IUserService $userService)
+    public function authenticate(Request $request)
     {
         $formFields = $request->validate([
             'username' => 'required',
@@ -51,7 +52,7 @@ class UserController extends Controller
         ]);
 
         
-        if($userService->login($request,$formFields))
+        if($this->userRepostory->login($request,$formFields))
         {
             return redirect('/')->with('message','You are now logged in!');
         }
@@ -60,10 +61,10 @@ class UserController extends Controller
     }
 
     //Logout user
-    public function logout(Request $request,IUserService $userService)
+    public function logout(Request $request)
     {
-        $userService->logout($request);
-        
+        $this->userRepostory->logout($request);
+
         $request->session()->flash('message', 'You have been logged out!');
 
         return redirect('/');
@@ -78,7 +79,7 @@ class UserController extends Controller
         return view('user.edit' , ['user' => $user]);
     }
 
-    public function storeEditUser(Request $request,IUserService $userService,FileService $fileService)
+    public function storeEditUser(Request $request,FileService $fileService)
     {
         $formFields = $request->validate([
             'age' => 'numeric|min:18|max:85',
@@ -92,11 +93,11 @@ class UserController extends Controller
         $formFields['avatar'] = $fileService->storeFile($request,'avatar','avatars');
         
         $user = auth()->user();
-
+        
         $user->update($formFields);
 
         //Logout user
-        $userService->logout($request);
+        $this->userRepostory->logout($request);
         
         return redirect('/')->with('message','User is updated.Please login again!');
     }
