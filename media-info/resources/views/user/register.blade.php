@@ -8,6 +8,9 @@
       </div>
       <form action="{{ URL::asset('/users') }}" method="Post">
         @csrf
+        @error('error')
+          <p class="text-center text-danger">{{$message}}</p>
+        @enderror
       <div class="form-outline m-3 w-75 mx-auto">
         @error('username')
           <p class="text-center text-danger">{{$message}}</p>

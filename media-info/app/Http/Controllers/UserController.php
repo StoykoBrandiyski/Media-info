@@ -1,18 +1,19 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Contracts\UserContract;
 use Illuminate\Http\Request;
 use App\Services\FileService;
+use App\Contracts\UserContract;
+use App\Exceptions\UserAlreadyExistException;
 
 
 class UserController extends Controller
 {
-    private $userRepostory;
+    private UserContract $userRepository;
 
-    public function __construct(UserContract $userRepostory)
+    public function __construct(UserContract $userRepository)
     {
-        $this->userRepostory = $userRepostory;
+        $this->userRepository = $userRepository;
     }
 
     //Show register form
@@ -33,7 +34,11 @@ class UserController extends Controller
             'country' => ['required','min:5','max:50']
         ]);
 
-        $user = $this->userRepository->create($formFields);
+        try {
+            $this->userRepository->create($formFields); 
+        } catch (UserAlreadyExistException $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
+        }
         return redirect('/')->with('message','User create and logged in');
     }
 
@@ -52,18 +57,18 @@ class UserController extends Controller
         ]);
 
         
-        if($this->userRepostory->login($request,$formFields))
+        if($this->userRepository->login($request,$formFields))
         {
             return redirect('/')->with('message','You are now logged in!');
         }
 
-        return back()->withError(['username' => 'Invalid Credentials'])->onlyInput('username');
+        return back()->withErrors(['username' => 'Invalid Credentials'])->onlyInput('username');
     }
 
     //Logout user
     public function logout(Request $request)
     {
-        $this->userRepostory->logout($request);
+        $this->userRepository->logout($request);
 
         $request->session()->flash('message', 'You have been logged out!');
 
@@ -97,7 +102,7 @@ class UserController extends Controller
         $user->update($formFields);
 
         //Logout user
-        $this->userRepostory->logout($request);
+        $this->userRepository->logout($request);
         
         return redirect('/')->with('message','User is updated.Please login again!');
     }

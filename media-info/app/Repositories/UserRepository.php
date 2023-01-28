@@ -5,7 +5,9 @@ namespace App\Repositories;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Contracts\UserContract;
+use Illuminate\Support\Facades\Log;
 use App\Repositories\BaseRepository;
+use App\Exceptions\UserAlreadyExistException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserRepository extends BaseRepository implements UserContract
@@ -26,15 +28,27 @@ class UserRepository extends BaseRepository implements UserContract
         }
     }
 
+    public function getUserByEmail($email)
+    {
+        try {
+            return $this->findOneBy(['email' => $email]);
+
+        } catch (ModelNotFoundException $ex) {
+            throw new ModelNotFoundException($ex);
+        }
+    }
     public function create($fiels)
     {
-        if(empty($fiels))
-        {
+        if (empty($fiels)){
 
+        }
+        if ($this->getUserByEmail($fiels['email']) != null){
+            Log::error('The email already exist!');
+            throw new UserAlreadyExistException('The email already exist!');
         }
 
         $fiels['password'] = bcrypt($fiels['password']);
-
+        
         $user = User::create($fiels);
 
         return $user;

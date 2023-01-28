@@ -30,4 +30,9 @@ interface UserContract
      */
     function logout(Request $request);
     
+    /**
+     * @param $email
+     * @return mixed
+     */
+    function getUserByEmail($email);
 }

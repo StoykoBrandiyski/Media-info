@@ -8,9 +8,6 @@
     </div>
     <form action="{{ URL::asset('/users/authenticate') }}" method="POST">
       @csrf
-      @if($errors->any())
-          <h4>{{$errors->first()}}</h4>
-      @endif
     <div class="form-outline m-3 w-75 mx-auto">
       <input type="text" name="username"  value="{{old('username')}}" class="form-control" />
       <label class="form-label fst-italic" for="form2Example1">Потребител</label>
