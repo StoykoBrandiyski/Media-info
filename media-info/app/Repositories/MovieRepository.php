@@ -26,13 +26,13 @@ class MovieRepository extends BaseRepository implements MovieContract
         return $movies;
     }
     
-    public function moviesByCategory($category)
+    public function moviesByCategory($category,$perPage)
     {
         $moviesDb = DB::table('movies')
         ->join('categories', 'categories.id', '=', 'movies.category_id')
         ->where('name',$category)
         ->select('movies.*')
-        ->get();
+        ->paginate($perPage);
 
         return $moviesDb; 
     }

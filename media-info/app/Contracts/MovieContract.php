@@ -10,10 +10,11 @@ interface MovieContract {
     function getLatestMovie($countMovie);
     
     /**
-    * @param $category
+     * @param $category
+     * @param $perPage
      * @return mixed
      */
-    function moviesByCategory($category);
+    function moviesByCategory($category,$perPage);
 
     /**
      * @param $fiels

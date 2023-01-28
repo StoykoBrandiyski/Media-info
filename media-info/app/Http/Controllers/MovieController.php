@@ -16,7 +16,7 @@ class MovieController extends Controller
     }
     public function getAllMoviesByCategory($category)
     {
-        $moviesDb = $this->movieRepository->moviesByCategory($category);
+        $moviesDb = $this->movieRepository->moviesByCategory($category,15);
  
         return view('movie.all',
         ['movies' =>  $moviesDb] );

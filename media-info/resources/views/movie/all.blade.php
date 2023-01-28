@@ -28,7 +28,7 @@
             </div>
         </div>
         @endforeach
-       
+      
        <!--
         <div class="card">
           <img src="https://i.imgur.com/ZTkt4I5.jpg" class="card-img-top" alt="...">
@@ -37,8 +37,10 @@
           </div>
         </div>-->
     </div>
-  
-    
+
       </div>
         </div>
+    <div class="row">
+    {!! $movies->links() !!}
+    </div>
 </x-layout>
