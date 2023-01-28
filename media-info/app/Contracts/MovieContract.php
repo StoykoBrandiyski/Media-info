@@ -4,9 +4,10 @@ namespace App\Contracts;
 
 interface MovieContract {
     /**
+     * @param $countMovie
      * @return mixed
      */
-    function getLatestMovie();
+    function getLatestMovie($countMovie);
     
     /**
     * @param $category

@@ -16,9 +16,12 @@ class MovieRepository extends BaseRepository implements MovieContract
         $this->model = $model;
     }
 
-    public function getLatestMovie()
+    public function getLatestMovie($countMovie)
     {
-        $movies = $this->model->all(['id','title', 'image']);//Movie::latest()->select('id','title', 'image')->get();
+        $movies = $this->model
+                    ->orderBy('id', 'DESC')
+                    ->take($countMovie)
+                    ->get(['id','title', 'image']);
 
         return $movies;
     }

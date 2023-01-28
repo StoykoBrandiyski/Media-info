@@ -14,8 +14,9 @@ class HomeController extends Controller
 
     public function index()
     {
-        $movies = $this->movieRepository->getLatestMovie();
+        $movies = $this->movieRepository->getLatestMovie(4);
 
+        
         return view('home.index',[ 'movies' => $movies] );
     }
 }
