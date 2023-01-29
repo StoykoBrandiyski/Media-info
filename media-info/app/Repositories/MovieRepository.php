@@ -37,6 +37,17 @@ class MovieRepository extends BaseRepository implements MovieContract
         return $moviesDb; 
     }
 
+    public function moviesByCategoryId($categoryId, $perPage)
+    {
+        $moviesDb = DB::table('movies')
+        ->join('categories', 'categories.id', '=', 'movies.category_id')
+        ->where('category_id',$categoryId)
+        ->select('movies.*')
+        ->paginate($perPage);
+
+        return $moviesDb; 
+    }
+
     public function addMovie($fiels)
     {
         $movie = $this->model->create($fiels);

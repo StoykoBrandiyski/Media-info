@@ -21,4 +21,11 @@ interface MovieContract {
      * @return bool
      */
     function addMovie($fiels);
+
+    /**
+     * @param $categoryId
+     * @param $perPage
+     * @return array
+     */
+    function moviesByCategoryId($categoryId, $perPage);
 } 

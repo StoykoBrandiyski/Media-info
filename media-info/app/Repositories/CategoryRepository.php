@@ -15,6 +15,6 @@ class CategoryRepository extends BaseRepository implements CategoryContract
 
     public function getAllCategories()
     {
-        return $this->model->all(['name']);
+        return $this->model->all(['id','name']);
     }
 }

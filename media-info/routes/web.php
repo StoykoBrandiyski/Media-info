@@ -36,10 +36,10 @@ Route::get('/editUser',[UserController::class, 'editPage']);
 Route::post('/storeEditUser', [UserController::class, 'storeEditUser']);
 
 //Categories 
-Route::get('/categories',[CategoryController::class, 'getCategoris']);
+Route::get('/categories',[CategoryController::class, 'getCategories']);
 
 //Movie
-Route::get('/categories/{name}',[MovieController::class ,'getAllMoviesByCategory']);
+Route::get('/categories/{categoryId}',[MovieController::class ,'getAllMoviesByCategoryId']);
 
 Route::get('/movie_page/{movie}',[MovieController::class, 'getMovie']);
 

@@ -2,12 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Contracts\CategoryContract;
 
 class CategoryController extends Controller
 {
-    public function getCategoris()
+    private $categoryRepository;
+
+    public function __construct(CategoryContract $categoryRepository)
     {
-        return view('category.all');
+        $this->categoryRepository = $categoryRepository; 
+    }
+    public function getCategories()
+    {
+        $categories = $this->categoryRepository->getAllCategories();
+        
+        return view('category.all', [
+            'categories' => $categories
+        ]);
     }
 }

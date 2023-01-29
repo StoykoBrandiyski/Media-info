@@ -7,6 +7,10 @@
                 <label class="col-sm-2 col-form-label">Избери категория: </label>
                 <div class="col-sm-4">
                     <select class="form-select" name="category_id">
+                        @foreach ($categories as $category)
+                            <option value="{{$category->id}}">{{$category->name}}</option>
+                        @endforeach
+                        <!--
                         <option value="1">Екшън</option>
                         <option value="2">Комедия</option>
                         <option value="3">Фантастика</option>
@@ -15,7 +19,7 @@
                         <option value="6">Драма</option>
                         <option value="7">Трилър</option>
                         <option value="8">Анимации</option>
-                        <option value="9">Уестърн</option>
+                        <option value="9">Уестърн</option>-->
                     </select>
                 </div>
             </div>

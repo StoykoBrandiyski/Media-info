@@ -5,19 +5,23 @@ use App\Models\Movie;
 use Illuminate\Http\Request;
 use App\Services\FileService;
 use App\Contracts\MovieContract;
+use App\Contracts\CategoryContract;
 
 class MovieController extends Controller
 {
     private $movieRepository;
+    private $categoryRepository;
 
-    public function __construct(MovieContract $movieRepository)
+    public function __construct(MovieContract $movieRepository,
+                        CategoryContract $categoryRepository)
     {
-        $this->movieRepository = $movieRepository;   
+        $this->movieRepository = $movieRepository;  
+        $this->categoryRepository = $categoryRepository; 
     }
-    public function getAllMoviesByCategory($category)
+    public function getAllMoviesByCategoryId($categoryId)
     {
-        $moviesDb = $this->movieRepository->moviesByCategory($category,15);
- 
+        $moviesDb = $this->movieRepository->moviesByCategoryId($categoryId,15);
+        
         return view('movie.all',
         ['movies' =>  $moviesDb] );
     }
@@ -31,7 +35,11 @@ class MovieController extends Controller
 
     public function addMovie()
     {
-        return view('movie.addMovie');
+        $categories = $this->categoryRepository->getAllCategories();
+
+        return view('movie.addMovie',[
+            'categories' => $categories
+        ]);
     }
 
     public function storeMovie(Request $request,FileService $fileService)
