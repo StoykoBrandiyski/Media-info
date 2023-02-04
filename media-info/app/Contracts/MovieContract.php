@@ -28,4 +28,10 @@ interface MovieContract {
      * @return array
      */
     function moviesByCategoryId($categoryId, $perPage);
+
+    /**
+     * @param $userId
+     * @return array
+     */
+    function countMoviesByUserId($userId);
 } 

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Contracts\MovieContract;
 use Illuminate\Http\Request;
 use App\Services\FileService;
 use App\Contracts\UserContract;
@@ -10,10 +11,14 @@ use App\Exceptions\UserAlreadyExistException;
 class UserController extends Controller
 {
     private UserContract $userRepository;
+    private MovieContract $movieRepository;
 
-    public function __construct(UserContract $userRepository)
+    public function __construct(
+        UserContract $userRepository,
+        MovieContract $movieRepository)
     {
         $this->userRepository = $userRepository;
+        $this->movieRepository = $movieRepository;
     }
 
     //Show register form
@@ -62,7 +67,8 @@ class UserController extends Controller
             return redirect('/')->with('message','You are now logged in!');
         }
 
-        return back()->withErrors(['username' => 'Invalid Credentials'])->onlyInput('username');
+        return back()->withErrors(['username' => 'Invalid Credentials'])
+                     ->onlyInput('username');
     }
 
     //Logout user
@@ -81,7 +87,10 @@ class UserController extends Controller
     {
         $user = auth()->user();
 
-        return view('user.edit' , ['user' => $user]);
+        $countUserMovies = $this->movieRepository
+                                ->countMoviesByUserId($user->id);
+        return view('user.edit' , 
+                    ['user' => $user,'countUserMovies' => $countUserMovies]);
     }
 
     public function storeEditUser(Request $request,FileService $fileService)

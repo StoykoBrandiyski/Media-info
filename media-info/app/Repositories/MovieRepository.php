@@ -52,4 +52,13 @@ class MovieRepository extends BaseRepository implements MovieContract
     {
         $movie = $this->model->create($fiels);
     }
+
+    public function countMoviesByUserId($userId)
+    {
+        $countMovies = $this->model
+                ->where('user_added',$userId)
+                ->count();
+
+        return $countMovies;
+    }
 }

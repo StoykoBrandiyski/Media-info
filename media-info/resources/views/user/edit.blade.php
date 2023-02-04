@@ -18,7 +18,7 @@
                    <p class="mb-4 text-center">Your statistics</p>
                       <div class="d-flex justify-content-between pb-2">
                           <h5 class="mb-1" style="font-size: .77rem;">Count uploded movies:</h5>
-                          <span>25</span>
+                      <span>{{$countUserMovies}}</span>
                       </div>
                       <div class="d-flex justify-content-between pb-2">
                           <h5 class="mb-1" style="font-size: .77rem;">Liked movies:</h5>
