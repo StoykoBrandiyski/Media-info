@@ -20,7 +20,13 @@
       <a href="api/langchange.php?lang=en">EN</a>
       
     </div>
-    
+    <div>
+    @if(count($errors) > 0)
+        @foreach ($errors->all() as $error)
+          <p>{{ $error }}</p>
+        @endforeach
+      @endif
+    </div>
     <div class="d-flex">
       @auth
        <a href="{{ URL::asset('/add') }}" class="p-2" id="add-movie">Добави филм</a>

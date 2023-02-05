@@ -25,15 +25,11 @@ Route::get('/register',[UserController::class,'create']);
 
 Route::post('/users',[UserController::class,'store']);
 
-Route::get('/login',[UserController::class,'login']);
+Route::get('/login',[UserController::class,'login'])->name('user.login');
 
 Route::post('/users/authenticate',[UserController::class,'authenticate']);
 
 Route::post('/logout',[UserController::class,'logout']);
-
-Route::get('/editUser',[UserController::class, 'editPage']);
-
-Route::post('/storeEditUser', [UserController::class, 'storeEditUser']);
 
 //Categories 
 Route::get('/categories',[CategoryController::class, 'getCategories']);
@@ -43,15 +39,25 @@ Route::get('/categories/{categoryId}',[MovieController::class ,'getAllMoviesByCa
 
 Route::get('/movie_page/{movie}',[MovieController::class, 'getMovie']);
 
-Route::get('/add',[MovieController::class, 'addMovie']);
-
-Route::post('/storeMovie',[MovieController::class, 'storeMovie']);
-
 //Comment
 Route::get('/comments/{id}' , [CommentController::class , 'getCommentsByMovieId']);
 
-Route::post('/addComment', [CommentController::class,'addComment']);
-
 Route::get('/commentCount/{id}', [CommentController::class, 'getCountCommentByMovieId']);
+
+//Auth
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/editUser',[UserController::class, 'editPage']);
+    Route::post('/storeEditUser', [UserController::class, 'storeEditUser']);
+
+    Route::get('/add',[MovieController::class, 'addMovie']);
+    Route::post('/storeMovie',[MovieController::class, 'storeMovie']);
+    Route::get('/edit/{movie}',[MovieController::class, 'editMovie']);
+    Route::post('/storeEditMovie',[MovieController::class, 'storeEditMovie']);
+
+    Route::post('/addComment', [CommentController::class,'addComment']);
+
+    return redirect('/');
+});
+
 
 

@@ -16,6 +16,12 @@ class MovieRepository extends BaseRepository implements MovieContract
         $this->model = $model;
     }
 
+    public function getMovieById($id)
+    {
+        $movie = $this->findOneOrFail($id);
+
+        return $movie;
+    }
     public function getLatestMovie($countMovie)
     {
         $movies = $this->model
@@ -26,18 +32,16 @@ class MovieRepository extends BaseRepository implements MovieContract
         return $movies;
     }
     
-    public function moviesByCategory($category,$perPage)
+    public function getMoviesByUserId($userId)
     {
-        $moviesDb = DB::table('movies')
-        ->join('categories', 'categories.id', '=', 'movies.category_id')
-        ->where('name',$category)
-        ->select('movies.*')
-        ->paginate($perPage);
+        $movies = $this->model
+                ->where('user_added',$userId)
+                ->get(['id','title', 'image']);
 
-        return $moviesDb; 
+        return $movies;
     }
 
-    public function moviesByCategoryId($categoryId, $perPage)
+    public function getMoviesByCategoryId($categoryId, $perPage)
     {
         $moviesDb = DB::table('movies')
         ->join('categories', 'categories.id', '=', 'movies.category_id')
@@ -60,5 +64,13 @@ class MovieRepository extends BaseRepository implements MovieContract
                 ->count();
 
         return $countMovies;
+    }
+
+    public function updateMovie($params)
+    {
+        //throw exception
+        $movie = $this->findOneOrFail($params['movieId']);
+        
+        $this->update($params,$params['movieId']);
     }
 }

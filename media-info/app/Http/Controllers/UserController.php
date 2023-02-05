@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\FileService;
 use App\Contracts\UserContract;
 use App\Exceptions\UserAlreadyExistException;
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserController extends Controller
 {
@@ -87,10 +87,20 @@ class UserController extends Controller
     {
         $user = auth()->user();
 
+        if (!$user){
+            return redirect('/')->withErrors(['error' => 'Invalid user!']);
+        }
+        $userId = $user->id;
+        $userMovies = $this->movieRepository->getMoviesByUserId($userId);
+       
         $countUserMovies = $this->movieRepository
-                                ->countMoviesByUserId($user->id);
+                               ->countMoviesByUserId($userId);
+        
         return view('user.edit' , 
-                    ['user' => $user,'countUserMovies' => $countUserMovies]);
+                   ['user' => $user,
+                   'countUserMovies' => $countUserMovies,
+                   'userMovies' => $userMovies
+                   ]);
     }
 
     public function storeEditUser(Request $request,FileService $fileService)

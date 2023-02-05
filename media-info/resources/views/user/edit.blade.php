@@ -111,6 +111,10 @@
                 </div>
               </div>            
             </div>
+            <div class="col pt-4">
+              <h1 class="text-center text-white fw-bold">Качени филми</h1>
+              <x-movies-slider :userMovies=$userMovies />
+            </div>
           </div>
         </div>
       </section>

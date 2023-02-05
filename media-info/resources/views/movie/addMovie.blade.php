@@ -10,16 +10,6 @@
                         @foreach ($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>
                         @endforeach
-                        <!--
-                        <option value="1">Екшън</option>
-                        <option value="2">Комедия</option>
-                        <option value="3">Фантастика</option>
-                        <option value="4">Ужаси</option>
-                        <option value="5">Приключенски</option>
-                        <option value="6">Драма</option>
-                        <option value="7">Трилър</option>
-                        <option value="8">Анимации</option>
-                        <option value="9">Уестърн</option>-->
                     </select>
                 </div>
             </div>
