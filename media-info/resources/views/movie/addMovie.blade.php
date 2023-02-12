@@ -6,10 +6,10 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Избери категория: </label>
                 <div class="col-sm-4">
-                    <select class="form-select" name="category_id">
+                    <select class="form-select" name="category_id[]" multiple>
                         @foreach ($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>
-                        @endforeach
+                        @endforeach        
                     </select>
                 </div>
             </div>

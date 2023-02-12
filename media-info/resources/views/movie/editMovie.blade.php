@@ -7,15 +7,15 @@
                     <input type="hidden" class="form-control" value="{{$movie->id}}" placeholder="" name="movieId">
                     <label class="col-sm-2 col-form-label">Избери категория: </label>
                     <div class="col-sm-4">
-                        <select class="form-select" name="category_id">
+                          <select class="form-select" name="category_id[]" multiple>
                             @foreach ($categories as $category)
                                 <option value="{{$category->id}}" 
                                     @if($movie->category_id == $category->id) {{ 'selected' }} 
                                     @endif>
                                     {{$category->name}}
                                 </option>
-                            @endforeach
-                          </select>
+                            @endforeach        
+                        </select>
                     </div>
                 </div>
         

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Contracts\CategoryContract;
+
 
 class CategoryController extends Controller
 {
@@ -12,6 +14,7 @@ class CategoryController extends Controller
     {
         $this->categoryRepository = $categoryRepository; 
     }
+
     public function getCategories()
     {
         $categories = $this->categoryRepository->getAllCategories();

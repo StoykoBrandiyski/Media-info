@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 use App\Services\FileService;
+use InvalidArgumentException;
 use App\Contracts\MovieContract;
 use App\Contracts\CategoryContract;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -46,7 +47,7 @@ class MovieController extends Controller
     public function storeMovie(Request $request,FileService $fileService)
     {
         $formFields = $request->validate([
-            'category_id' => 'required',
+            'category_id[]' => 'array:required',
             'title' => ['required','min:3','max:50'],
             'director' => ['required','min:5','max:50'],
             'actors' => ['required','min:3','max:250'],
@@ -58,6 +59,9 @@ class MovieController extends Controller
             'trailer_link' => 'max:200'
         ]);
         
+        $requestCategories = (array)$request->get('category_id');
+        $formFields['category_id'] = $requestCategories[0];
+            
         $formFields['user_added'] = auth()->user()->id;
 
         //need service
@@ -65,7 +69,13 @@ class MovieController extends Controller
 
         //$formFields['image'] = $request->file('image')->store('movie_images','public');
         
-        $this->movieRepository->addMovie($formFields);
+        $movie = $this->movieRepository->addMovie($formFields);
+       
+        try {
+            $this->categoryRepository->attachCategoriesToMovie($movie,$requestCategories);
+        } catch (InvalidArgumentException $ex) {
+            return back()->withErrors(['error' => $ex->getMessage()]);
+        }
         
         return redirect('/')->with('message','Movie created successfully');
     }
@@ -90,6 +100,7 @@ class MovieController extends Controller
     {
         
         $formFields = $request->validate([
+            'category_id[]' => 'array:required',
             'movieId' => 'required',
             'category_id' => 'required',
             'title' => ['required','min:3','max:50'],
@@ -101,13 +112,21 @@ class MovieController extends Controller
             'duration' => 'numeric|min:20|max:350',
             'trailer_link' => 'max:200'
         ]);
-        
+
+        $requestCategories = (array)$request->get('category_id');
+
+        unset($formFields['category_id']);
+     
         if ($request['image']) {
             $formFields['image'] = $fileService->storeFile($request,'image','movie_image');
         }
-
+       
         try { 
             $this->movieRepository->updateMovie($formFields);
+            $movie = $this->movieRepository->getMovieById($formFields['movieId']);
+
+            $this->categoryRepository->attachCategoriesToMovie($movie,$requestCategories);
+
         } catch (ModelNotFoundException $ex) {
            return back()->withErrors(['error' => 'Няма такъв модел!']);
         }

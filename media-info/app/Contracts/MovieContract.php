@@ -2,11 +2,12 @@
 
 namespace App\Contracts;
 
+
 interface MovieContract {
 
     /**
      * @param $id
-     * @return Movie
+     * @return mixed
      */
     function getMovieById($id);
 
@@ -18,7 +19,7 @@ interface MovieContract {
 
     /**
      * @param $fiels
-     * @return bool
+     * @return mixed
      */
     function addMovie($fiels);
 
@@ -37,13 +38,13 @@ interface MovieContract {
 
     /**
      * @param $userId
-     * @return array
+     * @return int
      */
     function countMoviesByUserId($userId);
 
     /**
      * @param $params
-     * @return array
+     * @return bool
      */
     function updateMovie($params);
 } 

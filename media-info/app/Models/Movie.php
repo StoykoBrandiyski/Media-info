@@ -25,9 +25,9 @@ class Movie extends Model
         'trailer_link'
     ];
 
-    public function category()
+    public function categories()
     {
-        return $this->belongsToMany('App\Models\Category');
+        return $this->belongsToMany(Category::class, 'category_movie', 'movie_id', 'category_id');
     }
 
     public function user()
