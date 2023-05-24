@@ -5,7 +5,6 @@ use  App\Http\Controllers\UserController;
 use  App\Http\Controllers\MovieController;
 use App\Http\Controllers\CommentController;
 use  App\Http\Controllers\CategoryController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,6 +57,3 @@ Route::group(['middleware' => ['auth']], function () {
 
     return redirect('/');
 });
-
-
-

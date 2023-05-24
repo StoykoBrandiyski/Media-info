@@ -40,7 +40,8 @@ class UserController extends Controller
         ]);
 
         try {
-            $this->userRepository->create($formFields); 
+            $this->userRepository->create($formFields);
+            $this->userRepository->login($request,$formFields);
         } catch (UserAlreadyExistException $e) {
             return back()->withErrors(['error' => $e->getMessage()]);
         }
@@ -121,8 +122,8 @@ class UserController extends Controller
         $user->update($formFields);
 
         //Logout user
-        $this->userRepository->logout($request);
+        //$this->userRepository->logout($request);
         
-        return redirect('/')->with('message','User is updated.Please login again!');
+        return redirect('/')->with('message','User is updated.');
     }
 }
